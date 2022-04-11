@@ -1,10 +1,8 @@
 // import cron from 'node-cron';
-import { getPreitag } from './crawlers/preitag.js';
-import { url } from './crawlers/constant.js';
+import getLassie from './crawlers/lassie.js';
 
 async function handleAsync() {
-  const lassie = await getPreitag(url.lassie);
-  console.log(lassie);
+  await getLassie();
 }
 
 handleAsync();

@@ -1,33 +1,27 @@
-import axios, { AxiosResponse } from 'axios';
+import puppeteer from 'puppeteer';
 import cheerio from 'cheerio';
 
-let html: AxiosResponse;
+export async function getPreitag(url: string) {
+  const browser = await puppeteer.launch({
+    headless: false,
+  });
 
-async function getHTML(URL: string) {
-  try {
-    return await axios.get(URL, {
-      headers: {
-        'User-Agent':
-          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36',
-        'Accept-Language': 'en-gb',
-        'Accept-Encoding': 'br, gzip, deflate',
-        Accept:
-          'test/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        Referer: 'http://www.google.com/',
-      },
-    });
-  } catch (error) {
-    console.error(error);
-  }
-}
+  const page = await browser.newPage();
+  await page.setViewport({
+    width: 1376,
+    height: 786,
+  });
+  await page.goto(url);
 
-export async function getPreitag(URL: string) {
-  if (!html) {
-    html = await getHTML(URL);
-  }
+  const dismissCookies = await page.$('.dismiss-cookies');
+  await dismissCookies?.click();
 
-  const $ = cheerio.load(html.data);
-  const preitag = {};
-  preitag['h1'] = $('h1').text();
-  return preitag;
+  const [button] = await page.$x("//span[contains(., 'Show all')]");
+  await button?.click();
+
+  const $ = cheerio.load(await page.content());
+
+  browser.close();
+
+  return $;
 }
