@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import cheerio from 'cheerio';
 
-export async function getPreitag(url: string) {
+export async function getFreitag(url: string) {
   const browser = await puppeteer.launch({
     headless: false,
   });
