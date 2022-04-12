@@ -1,10 +1,8 @@
 import { url } from './constant.js';
 import { getFreitag } from './freitag.js';
 import firestore from '../firestore/init.js';
-// import type { Product, ProductList } from './types.js';
 import { format } from 'date-fns';
 import firebase from 'firebase/compat';
-// import appRef from '../firestore/init.js';
 
 async function getLassie() {
   const $ = await getFreitag(url.lassie);
@@ -41,17 +39,20 @@ async function getLassie() {
       removes = removes.filter((p) => p.id !== pdt.id);
     });
 
-    lassie.update({
-      data: removes.reduce(
-        (prev, cur) =>
-          prev.find((pdt) => pdt.id === cur.id)
-            ? prev.filter((pdt) => pdt.id !== cur.id)
-            : prev,
-        [...db.data, ...adds],
-      ),
-    });
-    // console.log('add', adds);
-    // console.log('remove', removes);
+    if (adds.length > 0 || removes.length > 0) {
+      lassie.update({
+        data: removes.reduce(
+          (prev, cur) =>
+            prev.find((pdt) => pdt.id === cur.id)
+              ? prev.filter((pdt) => pdt.id !== cur.id)
+              : prev,
+          [...db.data, ...adds],
+        ),
+      });
+    }
+
+    console.log('add', adds);
+    console.log('remove', removes);
   }
 }
 
