@@ -1,5 +1,8 @@
 import cron from 'node-cron';
+import { initializeDiscordBot } from './sender/discord/init.js';
 import getLassie from './crawlers/lassie.js';
+
+initializeDiscordBot();
 
 async function handleAsync() {
   await getLassie();

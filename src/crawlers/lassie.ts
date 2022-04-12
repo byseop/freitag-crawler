@@ -3,6 +3,7 @@ import { getFreitag } from './freitag.js';
 import firestore from '../firestore/init.js';
 import { format } from 'date-fns';
 import firebase from 'firebase/compat';
+import { sendDiscordMessage } from '../sender/discord/init.js';
 
 async function getLassie() {
   const $ = await getFreitag(url.lassie);
@@ -18,7 +19,7 @@ async function getLassie() {
   });
 
   lassie.update({
-    collectDate: format(new Date(), 'yyyy-MM-dd: hh-mm'),
+    collectDate: format(new Date(), 'yyyy-MM-dd: HH-mm'),
     price: json.price,
   });
 
@@ -34,6 +35,15 @@ async function getLassie() {
           cover: `${url.coverImage}/${pdt.cover[0]}.jpg`,
           url: `https://www.freitag.ch${pdt.url}`,
         });
+
+        // 디스코드 메세지 알람
+        sendDiscordMessage(
+          `
+          **[신규 상품 추가 알림!]**
+          https://www.freitag.ch${pdt.url}
+          ${url.coverImage}/${pdt.cover[0]}.jpg
+          `,
+        );
       }
 
       removes = removes.filter((p) => p.id !== pdt.id);
