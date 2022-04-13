@@ -10,7 +10,7 @@ async function handleAsync() {
 
 // handleAsync();
 
-cron.schedule('* * * * *', async () => {
+cron.schedule('*/2 * * * *', async () => {
   console.log('running a task every minuets');
   await handleAsync();
 });

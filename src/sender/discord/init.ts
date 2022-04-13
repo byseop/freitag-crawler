@@ -14,7 +14,9 @@ export function initializeDiscordBot() {
   client.login(process.env.DISCORD_BOT_TOKEN);
 }
 
-export function sendDiscordMessage(message: string) {
+export function sendDiscordMessage(
+  message: string | Discord.MessagePayload | Discord.MessageOptions,
+) {
   const messageChannel = client.channels.cache.get(
     process.env.DISCORD_CHANNEL_ID,
   ) as TextChannel;

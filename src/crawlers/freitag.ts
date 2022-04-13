@@ -7,6 +7,15 @@ export async function getFreitag(url: string) {
   });
 
   const page = await browser.newPage();
+  const cookies = [
+    {
+      name: 'datadome',
+      value:
+        'ZWalW3qMeSfzd_LGaMdFacRS1Bnw~Fy6XSjZxf6WZ-dmf2LsjnSLuX384MdSYm0FygNgm0GZj9BQwgsI-o6ImYkBJdtgpaNyDHzEqw9N-PCMczuDMyXnOXKm6tkih_A',
+      domain: '.freitag.ch',
+    },
+  ];
+  await page.setCookie(...cookies);
   await page.setViewport({
     width: 1376,
     height: 786,

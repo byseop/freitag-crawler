@@ -19,7 +19,7 @@ async function getLassie() {
   });
 
   lassie.update({
-    collectDate: format(new Date(), 'yyyy-MM-dd: HH-mm'),
+    collectDate: format(new Date(), 'yyyy-MM-dd HH:mm'),
     price: json.price,
   });
 
@@ -37,13 +37,10 @@ async function getLassie() {
         });
 
         // 디스코드 메세지 알람
-        sendDiscordMessage(
-          `
-          **[신규 상품 추가 알림!]**
-          https://www.freitag.ch${pdt.url}
-          ${url.coverImage}/${pdt.cover[0]}.jpg
-          `,
-        );
+        sendDiscordMessage({
+          content: `**[신규 상품 입고알림!]**\n이름: **${pdt.title}**\n가격: **${json.price}**\n구매링크: https://www.freitag.ch${pdt.url}`,
+          files: pdt.cover.map((path) => `${url.coverImage}/${path}.jpg`),
+        });
       }
 
       removes = removes.filter((p) => p.id !== pdt.id);
