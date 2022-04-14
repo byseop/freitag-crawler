@@ -1,21 +1,21 @@
-import puppeteer from 'puppeteer';
+import chromium from 'chrome-aws-lambda';
 import cheerio from 'cheerio';
 
 export async function getFreitag(url: string) {
-  const browser = await puppeteer.launch({
+  const browser = await chromium.puppeteer.launch({
     headless: false,
   });
 
   const page = await browser.newPage();
-  const cookies = [
-    {
-      name: 'datadome',
-      value:
-        'ZWalW3qMeSfzd_LGaMdFacRS1Bnw~Fy6XSjZxf6WZ-dmf2LsjnSLuX384MdSYm0FygNgm0GZj9BQwgsI-o6ImYkBJdtgpaNyDHzEqw9N-PCMczuDMyXnOXKm6tkih_A',
-      domain: '.freitag.ch',
-    },
-  ];
-  await page.setCookie(...cookies);
+  // const cookies = [
+  //   {
+  //     name: 'datadome',
+  //     value:
+  //       '.8RmXQ_Zd6xC9n-RsrLS5AI5597zzavoXAgXq77KF5tVgHMnOxR0phEqYwIXNa3IbcsmX2OuBaX_Zvxsf~cvKgrYRpgEHeMuukDG5tH3xpRVHHiKwUHZiPeOTV6d4RWZ',
+  //     domain: '.freitag.ch',
+  //   },
+  // ];
+  // await page.setCookie(...cookies);
   await page.setViewport({
     width: 1376,
     height: 786,

@@ -1,6 +1,6 @@
 import Discord, { TextChannel } from 'discord.js';
 
-const client = new Discord.Client({ intents: ['GUILDS', 'GUILD_MESSAGES'] });
+const client = new Discord.Client({});
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
 });
@@ -15,7 +15,11 @@ export function initializeDiscordBot() {
 }
 
 export function sendDiscordMessage(
-  message: string | Discord.MessagePayload | Discord.MessageOptions,
+  message:
+    | Discord.APIMessageContentResolvable
+    | (Discord.MessageOptions & {
+        split?: false;
+      }),
 ) {
   const messageChannel = client.channels.cache.get(
     process.env.DISCORD_CHANNEL_ID,

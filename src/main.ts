@@ -1,16 +1,26 @@
 import cron from 'node-cron';
 import { initializeDiscordBot } from './sender/discord/init.js';
-import getLassie from './crawlers/lassie.js';
+import getProduct from './crawlers/product.js';
+import { target } from './crawlers/constant.js';
 
 initializeDiscordBot();
 
-async function handleAsync() {
-  await getLassie();
+function sleep(ms: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+export async function handleAsync() {
+  for (const item of target) {
+    await sleep(3000);
+    await getProduct(item);
+  }
 }
 
 // handleAsync();
 
 cron.schedule('*/2 * * * *', async () => {
-  console.log('running a task every minuets');
+  console.log('start crwaling');
   await handleAsync();
 });

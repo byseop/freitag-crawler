@@ -30,3 +30,7 @@ build/
 
 # env
 .env
+.secrets.yml
+
+# serverless
+.serverless
