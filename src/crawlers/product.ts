@@ -46,7 +46,7 @@ async function getProduct({
 
         // 디스코드 메세지 알람
         sendDiscordMessage(
-          `**[신규 상품 입고알림!]**\n모델: ${name.toUpperCase()}\n이름: **${
+          `**[신규 상품 입고알림!]**\n모델: **${name.toUpperCase()}**\n이름: **${
             pdt.title
           }**\n가격: **${json.price}**\n구매링크: https://www.freitag.ch${
             pdt.url
