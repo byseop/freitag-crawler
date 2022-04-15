@@ -39,23 +39,28 @@ async function getProduct({
     let removes = [...db.data];
     json.variations.forEach(async (pdt) => {
       if (!db.data.find((p) => p.id === pdt.id)) {
-        // 디스코드 메세지 알람
-        const message = await sendDiscordMessage(
-          `**[신규 상품 입고알림!]**\n모델: **${name.toUpperCase()}**\n이름: **${
-            pdt.title
-          }**\n가격: **${json.price}**\n구매링크: https://www.freitag.ch${
-            pdt.url
-          } \n이미지: ${urls.coverImage}/${pdt.cover[0]}.jpg`,
-        );
-
         // 등록
         adds.push({
           id: pdt.id,
           name: pdt.title,
           cover: `${urls.coverImage}/${pdt.cover[0]}.jpg`,
           url: `https://www.freitag.ch${pdt.url}`,
-          message: message.id,
+          // message: message.id,
         });
+        // 디스코드 메세지 알람
+        await sendDiscordMessage(
+          `**[신규 상품 입고알림!]**\n모델: **${name.toUpperCase()}**\n이름: **${
+            pdt.title
+          }**\n가격: **${json.price}**\n구매링크: https://www.freitag.ch${
+            pdt.url
+          } \n이미지: ${urls.coverImage}/${pdt.cover[0]}.jpg`,
+        )
+          .then(() => {
+            console.log('Discord 알림 발송');
+          })
+          .catch((e) => {
+            console.error(e);
+          });
       }
 
       removes = removes.filter((p) => p.id !== pdt.id);

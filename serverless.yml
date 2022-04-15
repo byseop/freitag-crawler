@@ -1,18 +1,24 @@
 service: freitag-crawler
 
+frameworkVersion: '3'
+
 provider:
   name: aws
   runtime: nodejs14.x
   memorySize: 512
-  timeout: 30
   region: ap-northeast-2
 
 custom:
   secrets: ${file(.secrets.yml):prod}
 
+package:
+  patterns:
+    - '!node_modules/puppeteer/.local-chromium/**'
+
 functions:
   freitag:
     handler: build/src/main.handleAsync
+    timeout: 45
     environment:
       FIREBASE_API_KEY: ${self:custom.secrets.FIREBASE_API_KEY}
       FIREBASE_AUTH_DOMAIN: ${self:custom.secrets.FIREBASE_AUTH_DOMAIN}
