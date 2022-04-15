@@ -1,4 +1,5 @@
 import cron from 'node-cron';
+import { format } from 'date-fns';
 import { initializeDiscordBot } from './sender/discord/init.js';
 import getProduct from './crawlers/product.js';
 import { target } from './crawlers/constant.js';
@@ -16,6 +17,11 @@ export async function handleAsync() {
 // handleAsync();
 
 cron.schedule('*/2 * * * *', async () => {
-  console.log('start crwaling');
+  console.log(
+    `Start crawling 🔥🔥 ${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+  );
   await handleAsync();
+  console.log(
+    `Finish crawling 👏👏 ${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`,
+  );
 });

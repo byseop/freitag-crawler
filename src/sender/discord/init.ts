@@ -3,11 +3,10 @@ import Discord, { TextChannel } from 'discord.js';
 const client = new Discord.Client({});
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
-});
-client.on('message', (message) => {
-  if (message.content === 'ping') {
-    message.reply('pong');
-  }
+  client.user.setActivity({
+    type: 'PLAYING',
+    name: '열심히 프라이탁 크롤링',
+  });
 });
 
 export function initializeDiscordBot() {
