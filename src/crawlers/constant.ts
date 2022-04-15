@@ -4,11 +4,11 @@ export const url = {
 };
 
 export const target = [
-  {
-    name: 'dragnet',
-    url: 'https://www.freitag.ch/en/f12',
-    scriptIndex: 2,
-  },
+  // {
+  //   name: 'dragnet',
+  //   url: 'https://www.freitag.ch/en/f12',
+  //   scriptIndex: 2,
+  // },
   {
     name: 'lassie',
     url: 'https://www.freitag.ch/en/f11',
@@ -29,14 +29,14 @@ export const target = [
     url: 'https://www.freitag.ch/en/f41',
     scriptIndex: 1,
   },
-  {
-    name: 'moss',
-    url: 'https://www.freitag.ch/en/f304',
-    scriptIndex: 1,
-  },
-  {
-    name: 'roi',
-    url: 'https://www.freitag.ch/en/f305',
-    scriptIndex: 1,
-  },
+  // {
+  //   name: 'moss',
+  //   url: 'https://www.freitag.ch/en/f304',
+  //   scriptIndex: 1,
+  // },
+  // {
+  //   name: 'roi',
+  //   url: 'https://www.freitag.ch/en/f305',
+  //   scriptIndex: 1,
+  // },
 ];
