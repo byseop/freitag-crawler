@@ -10,13 +10,9 @@ provider:
 custom:
   secrets: ${file(.secrets.yml):prod}
 
-package:
-  exclude:
-    - node_modules/puppeteer/.local-chromium/**
-
 functions:
   freitag:
-    handler: src/main.handleAsync
+    handler: build/src/main.handleAsync
     environment:
       FIREBASE_API_KEY: ${self:custom.secrets.FIREBASE_API_KEY}
       FIREBASE_AUTH_DOMAIN: ${self:custom.secrets.FIREBASE_AUTH_DOMAIN}
@@ -29,4 +25,7 @@ functions:
       DISCORD_CHANNEL_ID: ${self:custom.secrets.DISCORD_CHANNEL_ID}
     events:
       - schedule:
-        rate: rate(2 minute)
+          rate: rate(2 minutes)
+          enabled: true
+
+configValidationMode: error
