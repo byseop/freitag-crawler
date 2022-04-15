@@ -13,7 +13,7 @@ export function initializeDiscordBot() {
   client.login(process.env.DISCORD_BOT_TOKEN);
 }
 
-export function sendDiscordMessage(
+export async function sendDiscordMessage(
   message:
     | Discord.APIMessageContentResolvable
     | (Discord.MessageOptions & {
@@ -24,5 +24,18 @@ export function sendDiscordMessage(
     process.env.DISCORD_CHANNEL_ID,
   ) as TextChannel;
 
-  messageChannel?.send(message);
+  const messageInstance = await messageChannel?.send(message);
+
+  return messageInstance;
+}
+
+export function replyDiscordMessage(id: string, message: string) {
+  const messageChannel = client.channels.cache.get(
+    process.env.DISCORD_CHANNEL_ID,
+  ) as TextChannel;
+  const target = messageChannel.messages.cache.get(id);
+
+  if (target) {
+    target.reply(message);
+  }
 }

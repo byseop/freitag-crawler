@@ -3,6 +3,7 @@ export interface Product {
   name: string;
   url: string;
   cover: string;
+  message?: string;
 }
 
 export interface ProductList {
