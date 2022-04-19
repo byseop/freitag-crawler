@@ -25,7 +25,7 @@ export const target = [
     scriptIndex: 1,
   },
   {
-    name: 'hawaii-five-o',
+    name: 'hawaiifiveo',
     url: 'https://www.freitag.ch/en/f41',
     scriptIndex: 1,
   },

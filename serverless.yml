@@ -1,4 +1,4 @@
-service: freitag-crawler
+service: freitag-crawl-project-3
 
 frameworkVersion: '3'
 
@@ -16,9 +16,26 @@ package:
     - '!node_modules/puppeteer/.local-chromium/**'
 
 functions:
-  freitag:
-    handler: build/src/main.handleAsync
-    timeout: 45
+  # fretiag:
+  #   handler: build/src/main.handleAsync
+  #   timeout: 15
+  #   environment:
+  #     FIREBASE_API_KEY: ${self:custom.secrets.FIREBASE_API_KEY}
+  #     FIREBASE_AUTH_DOMAIN: ${self:custom.secrets.FIREBASE_AUTH_DOMAIN}
+  #     FIREBASE_PROJECT_ID: ${self:custom.secrets.FIREBASE_PROJECT_ID}
+  #     FIREBASE_STORAGE_BUCKET: ${self:custom.secrets.FIREBASE_STORAGE_BUCKET}
+  #     FIREBASE_MESSAGING_SENDER_ID: ${self:custom.secrets.FIREBASE_MESSAGING_SENDER_ID}
+  #     FIREBASE_APP_ID: ${self:custom.secrets.FIREBASE_APP_ID}
+  #     FIREBASE_MEASUREMENT_ID: ${self:custom.secrets.FIREBASE_MEASUREMENT_ID}
+  #     DISCORD_BOT_TOKEN_LASSIE: ${self:custom.secrets.DISCORD_BOT_TOKEN}
+  #     DISCORD_CHANNEL_ID: ${self:custom.secrets.DISCORD_CHANNEL_ID}
+  #   events:
+  #     - schedule:
+  #         rate: rate(2 minutes)
+  #         enabled: true
+  lassie:
+    handler: build/src/main.getLassie
+    timeout: 15
     environment:
       FIREBASE_API_KEY: ${self:custom.secrets.FIREBASE_API_KEY}
       FIREBASE_AUTH_DOMAIN: ${self:custom.secrets.FIREBASE_AUTH_DOMAIN}
@@ -27,7 +44,58 @@ functions:
       FIREBASE_MESSAGING_SENDER_ID: ${self:custom.secrets.FIREBASE_MESSAGING_SENDER_ID}
       FIREBASE_APP_ID: ${self:custom.secrets.FIREBASE_APP_ID}
       FIREBASE_MEASUREMENT_ID: ${self:custom.secrets.FIREBASE_MEASUREMENT_ID}
-      DISCORD_BOT_TOKEN: ${self:custom.secrets.DISCORD_BOT_TOKEN}
+      DISCORD_BOT_TOKEN_LASSIE: ${self:custom.secrets.DISCORD_BOT_TOKEN_LASSIE}
+      DISCORD_CHANNEL_ID: ${self:custom.secrets.DISCORD_CHANNEL_ID}
+    events:
+      - schedule:
+          rate: rate(2 minutes)
+          enabled: true
+  dexter:
+    handler: build/src/main.getDexter
+    timeout: 15
+    environment:
+      FIREBASE_API_KEY: ${self:custom.secrets.FIREBASE_API_KEY}
+      FIREBASE_AUTH_DOMAIN: ${self:custom.secrets.FIREBASE_AUTH_DOMAIN}
+      FIREBASE_PROJECT_ID: ${self:custom.secrets.FIREBASE_PROJECT_ID}
+      FIREBASE_STORAGE_BUCKET: ${self:custom.secrets.FIREBASE_STORAGE_BUCKET}
+      FIREBASE_MESSAGING_SENDER_ID: ${self:custom.secrets.FIREBASE_MESSAGING_SENDER_ID}
+      FIREBASE_APP_ID: ${self:custom.secrets.FIREBASE_APP_ID}
+      FIREBASE_MEASUREMENT_ID: ${self:custom.secrets.FIREBASE_MEASUREMENT_ID}
+      DISCORD_BOT_TOKEN_DEXTER: ${self:custom.secrets.DISCORD_BOT_TOKEN_DEXTER}
+      DISCORD_CHANNEL_ID: ${self:custom.secrets.DISCORD_CHANNEL_ID}
+    events:
+      - schedule:
+          rate: rate(2 minutes)
+          enabled: true
+  jamie:
+    handler: build/src/main.getJamie
+    timeout: 15
+    environment:
+      FIREBASE_API_KEY: ${self:custom.secrets.FIREBASE_API_KEY}
+      FIREBASE_AUTH_DOMAIN: ${self:custom.secrets.FIREBASE_AUTH_DOMAIN}
+      FIREBASE_PROJECT_ID: ${self:custom.secrets.FIREBASE_PROJECT_ID}
+      FIREBASE_STORAGE_BUCKET: ${self:custom.secrets.FIREBASE_STORAGE_BUCKET}
+      FIREBASE_MESSAGING_SENDER_ID: ${self:custom.secrets.FIREBASE_MESSAGING_SENDER_ID}
+      FIREBASE_APP_ID: ${self:custom.secrets.FIREBASE_APP_ID}
+      FIREBASE_MEASUREMENT_ID: ${self:custom.secrets.FIREBASE_MEASUREMENT_ID}
+      DISCORD_BOT_TOKEN_JAMIE: ${self:custom.secrets.DISCORD_BOT_TOKEN_JAMIE}
+      DISCORD_CHANNEL_ID: ${self:custom.secrets.DISCORD_CHANNEL_ID}
+    events:
+      - schedule:
+          rate: rate(2 minutes)
+          enabled: true
+  hawaiifiveo:
+    handler: build/src/main.getHawaiiFiveO
+    timeout: 15
+    environment:
+      FIREBASE_API_KEY: ${self:custom.secrets.FIREBASE_API_KEY}
+      FIREBASE_AUTH_DOMAIN: ${self:custom.secrets.FIREBASE_AUTH_DOMAIN}
+      FIREBASE_PROJECT_ID: ${self:custom.secrets.FIREBASE_PROJECT_ID}
+      FIREBASE_STORAGE_BUCKET: ${self:custom.secrets.FIREBASE_STORAGE_BUCKET}
+      FIREBASE_MESSAGING_SENDER_ID: ${self:custom.secrets.FIREBASE_MESSAGING_SENDER_ID}
+      FIREBASE_APP_ID: ${self:custom.secrets.FIREBASE_APP_ID}
+      FIREBASE_MEASUREMENT_ID: ${self:custom.secrets.FIREBASE_MEASUREMENT_ID}
+      DISCORD_BOT_TOKEN_HAWAIIFIVEO: ${self:custom.secrets.DISCORD_BOT_TOKEN_HAWAIIFIVEO}
       DISCORD_CHANNEL_ID: ${self:custom.secrets.DISCORD_CHANNEL_ID}
     events:
       - schedule:

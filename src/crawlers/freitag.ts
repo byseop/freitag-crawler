@@ -1,5 +1,6 @@
 import chromium from 'chrome-aws-lambda';
 import cheerio from 'cheerio';
+import sleep from '../utils/sleep.js';
 
 export async function getFreitag(url: string) {
   const browser = await chromium.puppeteer.launch({
@@ -14,7 +15,7 @@ export async function getFreitag(url: string) {
     {
       name: 'datadome',
       value:
-        '.DdxX4DggLnPeqQ-az.yIkTH.JK41KFjFIOxujbPPmWq688I0Ea2~vsvhrRc-N5-e6mndlgvptxJ3b~uRnYiqbxRTwyMvFkbRfsfPUPd0D-TRkD2RcUc3feOC.aR32ee',
+        'N8i7hCQguqx_g8eyJ1rvYn9RvuCINaw.wOEFtD5Q8~4tsfIEP_he-.GFz_~1THPk5umI5KUe7ujZJp3I3J0l-7QgunZaA4OUjur1I3_AC_M8nBHHg04vkChO-~ME-6J',
       domain: '.freitag.ch',
     },
   ];
@@ -31,6 +32,7 @@ export async function getFreitag(url: string) {
   });
   await page.goto(url);
   const $ = cheerio.load(await page.content());
+  await sleep(3000);
   await browser.close();
   return $;
 }
