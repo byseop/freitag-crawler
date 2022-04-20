@@ -1,7 +1,7 @@
 import { url as urls } from './constant.js';
 import { getFreitag } from './freitag.js';
 import firestore from '../firestore/init.js';
-import { format } from 'date-fns';
+import { format, add } from 'date-fns';
 import firebase from 'firebase/compat';
 import {
   sendDiscordMessage,
@@ -23,7 +23,12 @@ async function getProduct({
   ).children('script');
 
   if (!script || !script.html()) {
-    await sendDiscordMessage(`Blocked: ${name}`);
+    await sendDiscordMessage(
+      `Blocked: ${name}, Current time: ${format(
+        add(new Date(), { hours: 9 }),
+        'yyyy-MM-dd HH:mm:ss',
+      )}`,
+    );
     return;
   }
 
@@ -36,7 +41,7 @@ async function getProduct({
   });
 
   await doc.update({
-    collectDate: format(new Date(), 'yyyy-MM-dd HH:mm'),
+    collectDate: format(add(new Date(), { hours: 9 }), 'yyyy-MM-dd HH:mm'),
     price: json.price,
   });
 
