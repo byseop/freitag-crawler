@@ -11,21 +11,23 @@ export async function getFreitag(url: string) {
   });
 
   const page = (await browser.pages())[0];
-  const cookies = [
-    {
-      name: 'datadome',
-      value:
-        'N8i7hCQguqx_g8eyJ1rvYn9RvuCINaw.wOEFtD5Q8~4tsfIEP_he-.GFz_~1THPk5umI5KUe7ujZJp3I3J0l-7QgunZaA4OUjur1I3_AC_M8nBHHg04vkChO-~ME-6J',
-      domain: '.freitag.ch',
-    },
-  ];
+  const value = process.env.DATADOM_COOKIES;
+  if (value && value.length > 0) {
+    const cookies = [
+      {
+        name: 'datadome',
+        value,
+        domain: '.freitag.ch',
+      },
+    ];
+    await page.setCookie(...cookies);
+  }
   await page.setExtraHTTPHeaders({
     'Accept-Language': 'en-gb',
   });
   await page.setUserAgent(
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36',
   );
-  await page.setCookie(...cookies);
   await page.setViewport({
     width: 1376,
     height: 786,

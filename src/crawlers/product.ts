@@ -23,7 +23,7 @@ async function getProduct({
   ).children('script');
 
   if (!script || !script.html()) {
-    sendDiscordMessage(`Blocked: ${name}`);
+    await sendDiscordMessage(`Blocked: ${name}`);
     return;
   }
 

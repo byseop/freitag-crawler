@@ -97,6 +97,7 @@ functions:
       FIREBASE_MEASUREMENT_ID: ${self:custom.secrets.FIREBASE_MEASUREMENT_ID}
       DISCORD_BOT_TOKEN_HAWAIIFIVEO: ${self:custom.secrets.DISCORD_BOT_TOKEN_HAWAIIFIVEO}
       DISCORD_CHANNEL_ID: ${self:custom.secrets.DISCORD_CHANNEL_ID}
+      DATADOM_COOKIES:
     events:
       - schedule:
           rate: rate(2 minutes)

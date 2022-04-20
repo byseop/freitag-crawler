@@ -29,11 +29,11 @@ export async function sendDiscordMessage(
   messageChannel
     ?.send(`${type === 'mention' ? '<@&965276206780018738>\n' : ''}${message}`)
     .then(() => {
-      console.log(
-        `Discord send message complete.: ${
-          typeof message === 'string' && message
-        }`,
-      );
+      // console.log(
+      //   `Discord send message complete.: ${
+      //     typeof message === 'string' && message
+      //   }`,
+      // );
     });
 }
 
