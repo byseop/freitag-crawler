@@ -33,7 +33,7 @@ export async function getFreitag(url: string) {
   });
   await page.goto(url);
   const $ = cheerio.load(await page.content());
-  await sleep(1231);
+  await sleep(getRandomNumber(1500, 2900));
   await browser.close();
   return $;
 }

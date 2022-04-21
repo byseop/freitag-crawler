@@ -6,6 +6,7 @@ import firestore from '../firestore/init.js';
 import firebase from 'firebase/compat';
 import { Product } from './types.js';
 import randomUseragent from 'random-useragent';
+import getRandomNumber from '../utils/randomNumber.js';
 
 export default async function addCart(products: Product[]) {
   const browser = await chromium.puppeteer.launch({
@@ -37,24 +38,24 @@ export default async function addCart(products: Product[]) {
 
   // login
   await page.goto('https://www.freitag.ch/en');
-  await sleep(1782);
+  await sleep(getRandomNumber(1500, 2900));
   await page.click('.dismiss-cookies');
-  await sleep(2091);
+  await sleep(getRandomNumber(1500, 2900));
   await page.click('a[title="View my profile"]');
-  await sleep(2749);
+  await sleep(getRandomNumber(1500, 2900));
   await page.focus('.form-type-email input');
   await page.keyboard.type(process.env.MY_ID);
-  await sleep(1049);
+  await sleep(getRandomNumber(1500, 2900));
   await page.focus('.form-type-password input');
   await page.keyboard.type(process.env.MY_PW);
   await page.click('#edit-submit');
-  await sleep(2198);
+  await sleep(getRandomNumber(1500, 2900));
 
   // add cart loop;
   for (const product of products) {
     try {
       await addProductToCart(page, product);
-      await sleep(2119);
+      await sleep(getRandomNumber(1500, 2900));
     } finally {
       // eslint-disable-next-line no-unsafe-finally
       continue;
@@ -74,19 +75,19 @@ async function addProductToCart(page: Page, product: Product) {
   if (db) {
     // go to page
     await page.goto(product.url);
-    await sleep(3120);
+    await sleep(getRandomNumber(1500, 2900));
 
     // add cart
     await page.click('.fri-cart.relative');
-    await sleep(2498);
+    await sleep(getRandomNumber(1500, 2900));
 
     // go to checkout
     await page.click('.js-cart-button');
-    await sleep(2740);
+    await sleep(getRandomNumber(1500, 2900));
 
     // save and continue
     await page.click('#edit-actions-next-clone');
-    await sleep(3210);
+    await sleep(getRandomNumber(1500, 2900));
     await page.click('#edit-actions-next-clone');
 
     await doc.update({
