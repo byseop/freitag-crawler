@@ -8,6 +8,7 @@ import {
   // replyDiscordMessage,
 } from '../sender/discord/init.js';
 import addCart from './addCart.js';
+import { Product } from './types.js';
 
 async function getProduct({
   name,
@@ -47,7 +48,7 @@ async function getProduct({
   });
 
   if (db) {
-    const adds = [];
+    const adds: Product[] = [];
     let removes = [...db.data];
     await json.variations.forEach(async (pdt) => {
       if (!db.data.find((p) => p.id === pdt.id)) {
@@ -94,9 +95,7 @@ async function getProduct({
       });
       const realAdd = adds.filter((product) => !blacklist[product.id]);
       if (realAdd.length > 0) {
-        await addCart(
-          realAdd.map((product) => ({ url: product.url, id: product.id })),
-        );
+        await addCart(realAdd);
       }
     }
 

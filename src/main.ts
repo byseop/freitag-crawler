@@ -1,23 +1,6 @@
-import {
-  initializeDiscordBot,
-  // sendDiscordMessage,
-} from './sender/discord/init.js';
+import { initializeDiscordBot } from './sender/discord/init.js';
 import getProduct from './crawlers/product.js';
 import { target } from './crawlers/constant.js';
-// import sleep from './utils/sleep.js';
-
-// export async function handleAsync() {
-//   await initializeDiscordBot(async () => {
-//     // await sendDiscordMessage('크롤링 시작입니다.');
-//     for (const item of target) {
-//       // await sleep(2500);
-//       await getProduct(item);
-//     }
-//   });
-//   // return process.exit();
-//   return;
-// }
-// handleAsync();
 
 export async function getLassie() {
   await initializeDiscordBot(target[0].name, async () => {
