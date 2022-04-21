@@ -35,7 +35,7 @@ functions:
   #         enabled: true
   lassie:
     handler: build/src/main.getLassie
-    timeout: 15
+    timeout: 120
     environment:
       FIREBASE_API_KEY: ${self:custom.secrets.FIREBASE_API_KEY}
       FIREBASE_AUTH_DOMAIN: ${self:custom.secrets.FIREBASE_AUTH_DOMAIN}
@@ -46,13 +46,16 @@ functions:
       FIREBASE_MEASUREMENT_ID: ${self:custom.secrets.FIREBASE_MEASUREMENT_ID}
       DISCORD_BOT_TOKEN_LASSIE: ${self:custom.secrets.DISCORD_BOT_TOKEN_LASSIE}
       DISCORD_CHANNEL_ID: ${self:custom.secrets.DISCORD_CHANNEL_ID}
+      DATADOM_COOKIES:
+      MY_ID: byseop@gmail.com
+      MY_PW: skeowlak12!@
     events:
       - schedule:
-          rate: rate(2 minutes)
+          rate: rate(3 minutes)
           enabled: true
   dexter:
     handler: build/src/main.getDexter
-    timeout: 15
+    timeout: 120
     environment:
       FIREBASE_API_KEY: ${self:custom.secrets.FIREBASE_API_KEY}
       FIREBASE_AUTH_DOMAIN: ${self:custom.secrets.FIREBASE_AUTH_DOMAIN}
@@ -63,13 +66,16 @@ functions:
       FIREBASE_MEASUREMENT_ID: ${self:custom.secrets.FIREBASE_MEASUREMENT_ID}
       DISCORD_BOT_TOKEN_DEXTER: ${self:custom.secrets.DISCORD_BOT_TOKEN_DEXTER}
       DISCORD_CHANNEL_ID: ${self:custom.secrets.DISCORD_CHANNEL_ID}
+      DATADOM_COOKIES:
+      MY_ID: byseop@gmail.com
+      MY_PW: skeowlak12!@
     events:
       - schedule:
-          rate: rate(2 minutes)
+          rate: rate(3 minutes)
           enabled: true
   jamie:
     handler: build/src/main.getJamie
-    timeout: 15
+    timeout: 120
     environment:
       FIREBASE_API_KEY: ${self:custom.secrets.FIREBASE_API_KEY}
       FIREBASE_AUTH_DOMAIN: ${self:custom.secrets.FIREBASE_AUTH_DOMAIN}
@@ -80,13 +86,16 @@ functions:
       FIREBASE_MEASUREMENT_ID: ${self:custom.secrets.FIREBASE_MEASUREMENT_ID}
       DISCORD_BOT_TOKEN_JAMIE: ${self:custom.secrets.DISCORD_BOT_TOKEN_JAMIE}
       DISCORD_CHANNEL_ID: ${self:custom.secrets.DISCORD_CHANNEL_ID}
+      DATADOM_COOKIES:
+      MY_ID: byseop@gmail.com
+      MY_PW: skeowlak12!@
     events:
       - schedule:
-          rate: rate(2 minutes)
+          rate: rate(3 minutes)
           enabled: true
   hawaiifiveo:
     handler: build/src/main.getHawaiiFiveO
-    timeout: 15
+    timeout: 120
     environment:
       FIREBASE_API_KEY: ${self:custom.secrets.FIREBASE_API_KEY}
       FIREBASE_AUTH_DOMAIN: ${self:custom.secrets.FIREBASE_AUTH_DOMAIN}
@@ -98,9 +107,11 @@ functions:
       DISCORD_BOT_TOKEN_HAWAIIFIVEO: ${self:custom.secrets.DISCORD_BOT_TOKEN_HAWAIIFIVEO}
       DISCORD_CHANNEL_ID: ${self:custom.secrets.DISCORD_CHANNEL_ID}
       DATADOM_COOKIES:
+      MY_ID: ${self:custom.secrets.MY_ID}
+      MY_PW: ${self:custom.secrets.MY_PW}
     events:
       - schedule:
-          rate: rate(2 minutes)
+          rate: rate(3 minutes)
           enabled: true
 
 configValidationMode: error

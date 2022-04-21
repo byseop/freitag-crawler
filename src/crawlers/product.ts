@@ -7,6 +7,7 @@ import {
   sendDiscordMessage,
   // replyDiscordMessage,
 } from '../sender/discord/init.js';
+import addCart from './addCart.js';
 
 async function getProduct({
   name,
@@ -83,6 +84,20 @@ async function getProduct({
           [...db.data, ...adds],
         ),
       });
+    }
+
+    if (adds.length > 0) {
+      let blacklist: firebase.firestore.DocumentData;
+      const doc = firestore.collection('freitag').doc('blacklist');
+      await doc.get().then((doc) => {
+        blacklist = doc.data();
+      });
+      const realAdd = adds.filter((product) => !blacklist[product.id]);
+      if (realAdd.length > 0) {
+        await addCart(
+          realAdd.map((product) => ({ url: product.url, id: product.id })),
+        );
+      }
     }
 
     console.log(`[${name}] add`, adds);
