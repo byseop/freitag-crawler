@@ -93,9 +93,16 @@ async function getProduct({
       await doc.get().then((doc) => {
         blacklist = doc.data();
       });
-      const realAdd = adds.filter((product) => !blacklist[product.id]);
-      if (realAdd.length > 0) {
-        await addCart(realAdd);
+      if (blacklist) {
+        // console.log('blacklist:', blacklist);
+        const realAdd = adds.filter((product) => blacklist.data[product.id]);
+        if (realAdd.length > 0) {
+          console.log(
+            'realadd',
+            realAdd.map((pdt) => pdt.id),
+          );
+          await addCart(realAdd);
+        }
       }
     }
 

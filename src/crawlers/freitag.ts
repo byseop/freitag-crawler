@@ -2,6 +2,7 @@ import chromium from 'chrome-aws-lambda';
 import cheerio from 'cheerio';
 import sleep from '../utils/sleep.js';
 import randomUseragent from 'random-useragent';
+import getRandomNumber from '../utils/randomNumber.js';
 
 export async function getFreitag(url: string) {
   const browser = await chromium.puppeteer.launch({
