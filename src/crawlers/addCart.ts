@@ -5,7 +5,7 @@ import sleep from '../utils/sleep.js';
 import firestore from '../firestore/init.js';
 import firebase from 'firebase/compat';
 import { Product } from './types.js';
-import randomUseragent from 'random-useragent';
+import UserAgent from 'user-agents';
 import getRandomNumber from '../utils/randomNumber.js';
 import { add, format } from 'date-fns';
 
@@ -31,7 +31,8 @@ export default async function addCart(products: Product[]) {
   await page.setExtraHTTPHeaders({
     'Accept-Language': 'en-gb',
   });
-  await page.setUserAgent(randomUseragent.getRandom());
+  const userAgent = new UserAgent({ deviceCategory: 'desktop' });
+  await page.setUserAgent(userAgent.toString());
   await page.setViewport({
     width: 1376,
     height: 786,
